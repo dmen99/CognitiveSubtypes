@@ -1,3 +1,5 @@
+# These medication codes for the UKBB can be found at https://biobank.ndph.ox.ac.uk/showcase/coding.cgi?id=4&nl=1 .
+
 MEDICATION_CODES = {
     1185: 'vitamin e product [ctsu]',
     1187: 'chondroitin product',
