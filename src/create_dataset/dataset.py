@@ -30,7 +30,7 @@ class Dataset(Config):
 
         Example:
         >>> myDataset.create_binary_variables("medication", {"taking_painkiller": "(aspirin|tylenol)"})
-    
+           
     recode_diagnoses()
         Creates new variables for groups of diagnoses included or excluded, based on
         whether one or more of such diagnoses is present.
@@ -41,6 +41,9 @@ class Dataset(Config):
     apply_exclusion_criteria()
         Apply exclusion criteria by removing cases where any of the specified diagnoses are present
 
+    clean(voi: str)
+        Takes as input a variable of interest (e.g., 'medication'). Removes all columns beginning with this string from the final dataframe.
+    
     recode_vars()
         Replace values for each variable as specified in the config class 
     
@@ -135,6 +138,10 @@ class Dataset(Config):
         for key in self.excluded_diagnoses:
             self.df = self.df[self.df[key] == False]
 
+    def clean(self, voi: str):
+        colsToDrop = [col for col in self.df if col.startswith(voi)]
+        self.df.drop(dx_cols, axis=1, inplace=True)
+            
     def recode_vars(self):
         for name in self.variables:
             cols = [col for col in self.df.columns if col.startswith(name)]
