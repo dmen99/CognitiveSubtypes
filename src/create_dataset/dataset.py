@@ -140,7 +140,7 @@ class Dataset(Config):
 
     def clean(self, voi: str):
         colsToDrop = [col for col in self.df if col.startswith(voi)]
-        self.df.drop(dx_cols, axis=1, inplace=True)
+        self.df.drop(colsToDrop, axis=1, inplace=True)
             
     def recode_vars(self):
         for name in self.variables:
